@@ -1,0 +1,11 @@
+<p>base-form works!</p>
+<form (ngSubmit)="passToComponent()" [formGroup]='form'>
+    <div *ngFor="let element of fields;">
+        <label>{{element.label}}</label>
+        <div [ngSwitch]="element.controlType">
+            <input type="text" *ngSwitchCase="'textbox'"/>
+
+            <input type="password" *ngSwitchCase="'password'"/>
+        </div>
+    </div>
+</form>
