@@ -7,15 +7,22 @@ import { FormField } from 'src/helpers/form-field';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  formTestFields = [
-    FormField.TextBox({
-      key: 'username',
-      label: 'username'
-    }),
+  formTestFields!: any;
+  constructor(){
+  this.formTestFields=  [
+      FormField.TextBox({
+        key: 'username',
+        label: 'username'
+      }),
+  
+      FormField.Password({
+        key: 'password',
+        label: 'password'
+      })
+    ]
+  }
 
-    FormField.Password({
-      key: 'password',
-      label: 'password'
-    })
-  ]
+  showFormResponse(e: any){
+    console.log(e)
+  }
 }

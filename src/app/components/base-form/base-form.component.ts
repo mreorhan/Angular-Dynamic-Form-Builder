@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { BaseFormElement } from 'src/helpers/base-form-element';
 
@@ -9,22 +9,23 @@ import { BaseFormElement } from 'src/helpers/base-form-element';
 })
 export class BaseFormComponent implements OnInit {
 
-  form!: any;
+  form!: FormGroup;
   _fields!: Array<BaseFormElement<any, any>>;
   get fields(){
     return this._fields;
   }
   @Input() set fields(param: Array<BaseFormElement<any,any>>){
-    this.toFormGroup(param);
+    this.form = this.toFormGroup(param);
     this._fields = param;
   }
+  @Output() onSubmit = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
   }
 
   passToComponent() {
-
+    this.onSubmit.emit(this.form.getRawValue());
   }
 
   toFormGroup(fields: Array<BaseFormElement<any, any>>) {
